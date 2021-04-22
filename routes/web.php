@@ -1,6 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RecipesController;
+use App\Http\Controllers\ContactController;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +23,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+////////////////////////////////
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/recettes/{url}',[RecipesController::class, 'show'])->name('recipe');
+Route::get('/contact',[ContactController::class, 'index'])->name('contact');
+Route::post('/contact',[ContactController::class, 'sendMessage'])->name('sendMassage');
+
